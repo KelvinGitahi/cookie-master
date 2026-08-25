@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "CookieMaster",
+  "version": "1.0.0",
+  "description": "Import and export cookies as a Netscape cookies.txt file or a JSON cookie export.",
+  "permissions": ["cookies", "activeTab", "storage", "downloads", "clipboardWrite"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "CookieMaster"
+  }
+}

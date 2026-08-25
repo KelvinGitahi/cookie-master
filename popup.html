@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CookieMaster</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>CookieMaster</h1>
+    <p class="subtitle">Import &amp; export cookies — Netscape or JSON</p>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="import">Import</button>
+      <button class="tab-btn" data-tab="export">Export</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== IMPORT ===================== -->
+    <section id="importPanel" class="panel">
+      <label class="file-drop" id="dropZone">
+        <input type="file" id="fileInput" accept=".txt,.json,text/plain,application/json" hidden>
+        <span id="dropLabel">Choose a file or drag it here</span>
+      </label>
+
+      <div class="divider"><span>or paste below</span></div>
+
+      <textarea id="pasteArea" placeholder="Paste Netscape cookies.txt content or JSON array here..."></textarea>
+
+      <div class="options">
+        <label class="checkbox">
+          <input type="checkbox" id="overwriteExisting" checked>
+          Overwrite existing cookies with the same name/domain/path
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" id="skipExpired" checked>
+          Skip already-expired cookies
+        </label>
+      </div>
+
+      <button id="importBtn" disabled>Import Cookies</button>
+
+      <section class="progress" id="progressSection" hidden>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <p id="progressText"></p>
+      </section>
+
+      <section class="summary" id="summarySection" hidden>
+        <div class="summary-row ok"><span id="successCount">0</span> imported</div>
+        <div class="summary-row warn"><span id="skipCount">0</span> skipped</div>
+        <div class="summary-row err"><span id="failCount">0</span> failed</div>
+      </section>
+
+      <details id="logDetails" hidden>
+        <summary>Details / errors</summary>
+        <ul id="logList"></ul>
+      </details>
+    </section>
+
+    <!-- ===================== EXPORT ===================== -->
+    <section id="exportPanel" class="panel" hidden>
+      <div class="options">
+        <label class="radio">
+          <input type="radio" name="exportScope" value="site" checked>
+          Current site (<span id="currentDomain">unknown</span>) and its subdomains
+        </label>
+        <label class="radio">
+          <input type="radio" name="exportScope" value="all">
+          All cookies in the browser
+        </label>
+      </div>
+
+      <div class="options">
+        <label class="radio">
+          <input type="radio" name="exportFormat" value="json" checked>
+          JSON
+        </label>
+        <label class="radio">
+          <input type="radio" name="exportFormat" value="netscape">
+          Netscape (cookies.txt)
+        </label>
+      </div>
+
+      <button id="exportBtn">Generate Export</button>
+
+      <textarea id="exportPreview" readonly placeholder="Generated cookie data will appear here..."></textarea>
+
+      <div class="export-actions" id="exportActions" hidden>
+        <button id="copyBtn" class="secondary">Copy</button>
+        <button id="downloadBtn" class="secondary">Download File</button>
+      </div>
+
+      <p class="export-count" id="exportCount"></p>
+    </section>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
